@@ -1,0 +1,75 @@
+
+<div class="container mt-5">
+
+
+  <div class="row">
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text"  id="inputGroup-sizing-default">Ara : </span>
+      </div>
+      <input type="text" (keyup)="searching(search.value)" #search class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+    </div>
+
+  </div>
+
+  <div class="mb-3">
+    <small class="form-text text-muted">Kitap talebinde bulunmak için listeden istediğiniz kitabı seçip 'Kitaba Git'e basınız.</small>
+  </div>
+
+
+  <div class="row">
+
+
+    <ng-container  *ngIf="search.value==''">
+    <div class="col-md-6">
+
+      <ul class="list-group" *ngFor="let book of books">
+        <li (click)="getSelected(book)" class="list-group-item" [ngClass]="{ 'bg-primary text-white': selectedBook.id==book.id }">{{ book.name }}</li>
+      </ul>
+    </div>
+    <div class="col-md-6" *ngIf="bookdetail>0">
+      <ul class="list-group">
+        <li class="list-group-item" *ngIf="selectedBook.userid!=null"><span class="badge bg-danger">Kitap kullanımda</span></li>
+        <li class="list-group-item" *ngIf="selectedBook.userid==null"><span class="badge bg-success">Kitap alınabilir</span></li>
+        <li class="list-group-item text-center">
+          <img src="../assets/img/{{ selectedBook.imageUrl }}" alt="">
+        </li>
+        <li class="list-group-item"><span style="font-weight: bold;">Kitap Adı : </span>{{ selectedBook.name }}</li>
+        <li class="list-group-item"><span style="font-weight: bold;">Kitap Açıklaması : </span>{{ selectedBook.description }}</li>
+        <li class="list-group-item"><span style="font-weight: bold;">Kitabı Alan Kişi : </span>{{ user.name }}</li>
+        <li class="list-group-item text-center"><a [routerLink]="['/booklist',selectedBook.id]" class="btn btn-primary">Kitaba Git</a></li>
+      </ul>
+
+    </div>
+  </ng-container>
+
+  <ng-container  *ngIf="search.value!=''">
+    <div class="col-md-6">
+      <ul class="list-group" *ngFor="let book of searchingBooks">
+        <li (click)="getSelected(book)" class="list-group-item" [ngClass]="{ 'bg-primary text-white': selectedBook.id==book.id }">{{ book.name }}</li>
+      </ul>
+    </div>
+    <div class="col-md-6" *ngIf="bookdetail>0">
+      <ul class="list-group">
+        <li class="list-group-item" *ngIf="selectedBook.userid!=null"><span class="badge bg-danger">Kitap kullanımda</span></li>
+        <li class="list-group-item" *ngIf="selectedBook.userid==null"><span class="badge bg-success">Kitap alınabilir</span></li>
+        <li class="list-group-item text-center">
+          <img src="../assets/img/{{ selectedBook.imageUrl }}" alt="">
+        </li>
+        <li class="list-group-item"><span style="font-weight: bold;">Kitap Adı : </span>{{ selectedBook.name }}</li>
+        <li class="list-group-item"><span style="font-weight: bold;">Kitap Açıklaması : </span>{{ selectedBook.description }}</li>
+        <li class="list-group-item"><span style="font-weight: bold;">Kitabı Alan Kişi : </span>{{ selectedBook.userid }}</li>
+        <li class="list-group-item text-center"><a [routerLink]="['/booklist',selectedBook.id]" class="btn btn-primary">Kitaba Git</a></li>
+      </ul>
+
+    </div>
+  </ng-container>
+
+
+
+
+
+  </div>
+</div>
+
+<router-outlet></router-outlet>

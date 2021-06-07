@@ -1,0 +1,111 @@
+<div class="container mt-5">
+
+  <nav>
+    <div class="nav nav-tabs">
+      <a class="nav-item nav-link" (click)="getBooksUI()" style="cursor: pointer;" [class.active]="state=='book'">Kitapları Yönet</a>
+      <a class="nav-item nav-link" (click)="getUsersUI()" style="cursor: pointer;" [class.active]="state=='user'">Kullanıcıları Yönet</a>
+    </div>
+  </nav>
+
+
+
+  <div class="row mt-4" *ngIf="state=='book'">
+    <div class="col-md-6">
+      <ul class="list-group" *ngFor="let book of books">
+        <li (click)="getSelected(book)" class="list-group-item"
+          [ngClass]="{ 'bg-primary text-white': selectedBook.id==book.id }">{{ book.name }} <button
+            (click)="deleteBook(book.id)" class="btn btn-danger btn-sm mx-2" style="float: right;">Sil</button><button
+            (click)="redirectUpdate(book.id)" class="btn btn-success btn-sm" style="float: right;">Düzenle</button></li>
+      </ul>
+    </div>
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-12">
+          <button (click)="logout()" class="btn btn-primary" style="float: right;"><i class="bi bi-box-arrow-left"
+              style="margin-right: 0.5rem;"></i>Çıkış Yap</button>
+          <button (click)="btnKitapEkle=true" class="btn btn-success" style="float: right; margin-right: 1rem;"><i
+              class="bi bi-plus-square" style="margin-right: 0.5rem;"></i>Kitap Ekle</button>
+        </div>
+
+      </div>
+      <div class="row bg-light" style="margin-top: 3rem;" *ngIf="btnKitapEkle">
+        <form>
+          <div class="form-group mt-3">
+            <label class="my-2">Kitap Adı:</label>
+            <input type="text" [formControl]="name" #newBookName class="form-control"
+              placeholder="Kitabın adını giriniz.">
+            <div *ngIf="name.touched && name.invalid" class="alert alert-danger">
+              <ul>
+                <li *ngIf="name.errors.required">Kitap ismi giriniz</li>
+                <li *ngIf="name.errors.minlength">Kitap ismi minumum 5 karakter olmalıdır</li>
+              </ul>
+            </div>
+          </div>
+          <div class="form-group ">
+            <label class="my-2">Kitap Açıklaması</label>
+            <input type="text" [formControl]="description" #newBookDescription class="form-control"
+              placeholder="Kitabın açıklamasını giriniz.">
+            <div *ngIf="description.touched && description.invalid" class="alert alert-danger">
+              <ul>
+                <li *ngIf="description.errors.required">Kitap açıklaması giriniz</li>
+                <li *ngIf="description.errors.minlength">Kitap açıklaması minumum 20 karakter olmalıdır</li>
+              </ul>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="my-2">Kitap Resmi</label>
+            <input type="text" [formControl]="imageUrl" #newBookImageUrl class="form-control"
+              placeholder="Kitabın resim dosyasının adını giriniz.">
+            <div *ngIf="imageUrl.touched && imageUrl.invalid" class="alert alert-danger">
+              <ul>
+                <li *ngIf="imageUrl.errors.required">Dosya ismi giriniz</li>
+                <li *ngIf="imageUrl.errors.wrongExtension">Dosya uzantısı uygun değil</li>
+              </ul>
+            </div>
+            <small class="form-text text-muted">Dosyanız jpg,jpeg,png formatlarından birisi olmalıdır.</small>
+          </div>
+
+          <button [disabled]="name.invalid || description.invalid || imageUrl.invalid"
+            (click)="addBook(newBookName.value,newBookDescription.value,newBookImageUrl.value)" type="button"
+            class="btn btn-primary mt-2"><i class="bi bi-folder-plus" style="margin-right: 0.5rem;"></i>Ekle</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row mt-4" *ngIf="state=='user'">
+    <div class="col-md-6">
+      <ul class="list-group" *ngFor="let user of users">
+        <li (click)="getSelectedU(user)" class="list-group-item"
+          [ngClass]="{ 'bg-primary text-white': selectedUser.id==user.id }">{{ user.name }} <button (click)="deleteUser(user.id)"
+            class="btn btn-danger btn-sm mx-2" style="float: right;">Sil</button><button (click)="updateUser(user)" class="btn btn-success btn-sm"
+            style="float: right;">Düzenle</button></li>
+      </ul>
+    </div>
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-12">
+          <button (click)="logout()" class="btn btn-primary" style="float: right;"><i class="bi bi-box-arrow-left"
+              style="margin-right: 0.5rem;"></i>Çıkış Yap</button>
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>

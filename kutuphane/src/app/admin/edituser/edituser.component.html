@@ -1,0 +1,32 @@
+<div class="container">
+
+  <form>
+
+    <div class="form-group">
+      <label class="my-2">Kullanıcı Adı:</label>
+      <input type="text" #userRealName  class="form-control" [value]="selectedUser.realname">
+    </div>
+    <div class="form-group">
+      <label class="my-2">Kullanıcı Soyadı:</label>
+      <input type="text" #userRealSurname class="form-control" [value]="selectedUser.realsurname">
+    </div>
+    <div class="form-group">
+      <label class="my-2">Kullanıcı username:</label>
+      <input type="text" #username class="form-control" [value]="selectedUser.name">
+    </div>
+    <div class="form-group">
+      <label class="my-2">Kullanıcı Şifresi:</label>
+      <input type="text" #password class="form-control" [value]="selectedUser.password">
+    </div>
+    <div class="form-group">
+      <label class="my-2">Aldığı Kitap:</label>
+      <input type="text" #password class="form-control" [value]="book?.name" disabled>
+    </div>
+
+
+    <button (click)="updateUser(userRealName.value,userRealSurname.value,username.value,password.value)" type="button" class="btn btn-primary mt-3">Kaydet</button>
+    <button (click)="removeBookFromUser()" *ngIf="book?.name" class="btn btn-danger mt-3 mx-2">Kitabı Al</button>
+  </form>
+
+
+</div>

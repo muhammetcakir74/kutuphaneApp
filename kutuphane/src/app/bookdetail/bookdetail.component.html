@@ -1,0 +1,17 @@
+<div class="container">
+  <ul class="list-group">
+    <li class="list-group-item text-center" style="border: none;">
+      <img src="../assets/img/{{ selectedBook.imageUrl }}">
+    </li>
+
+    <li class="list-group-item" *ngIf="selectedBook.userid==null" style=" border-top: 1px solid rgba(0,0,0,0.125);"><span class="badge bg-success">Kitap alınabilir</span></li>
+    <li class="list-group-item" *ngIf="selectedBook.userid!=null" style=" border-top: 1px solid rgba(0,0,0,0.125);"><span class="badge bg-danger">Kitap kullanımda</span></li>
+    <li class="list-group-item" ><span class="badge bg-warning mx-2">Id: {{selectedBook.id}}</span><span style="font-weight: bold;">Kitap Adı : </span>{{ selectedBook.name }}</li>
+    <li class="list-group-item"><span style="font-weight: bold;">Kitap Açıklaması : </span>{{ selectedBook.description }}</li>
+    <li class="list-group-item"><span style="font-weight: bold;">Kitabı Alan Kişi : </span>{{ user?.name }}</li>
+    <li class="list-group-item text-center" *ngIf="selectedBook.userid==null && activeUser.name!='Misafir'"><button (click)="requestBook()" class="btn btn-success">Kitabı Talep Et</button></li>
+    <li class="list-group-item text-center" *ngIf="selectedBook.userid!=null || activeUser.name=='Misafir'">Bu kitap için talep oluşturulamaz.</li>
+
+
+  </ul>
+</div>

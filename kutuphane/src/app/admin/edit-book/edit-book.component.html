@@ -1,0 +1,30 @@
+<div class="container">
+
+  <form>
+    <div class="form-group text-center">
+      <img src="../assets/img/{{ selectedBook.imageUrl }}">
+    </div>
+    <div class="form-group">
+      <label>Kitap Adı</label>
+      <input type="text" #bookname  class="form-control" [value]="selectedBook.name">
+    </div>
+    <div class="form-group">
+      <label >Kitap Açıklaması</label>
+      <textarea type="text" #bookdescription class="form-control">{{ selectedBook.description }}</textarea>
+    </div>
+    <div class="form-group">
+      <label >Kitap Resmi</label>
+      <input type="text" #bookimageurl class="form-control" [value]="selectedBook.imageUrl">
+    </div>
+    <div class="form-group">
+      <label >Kitabı Alan Kişi</label>
+      <input type="text" #username class="form-control" [value]="user?.name">
+    </div>
+
+
+
+    <button (click)="updateBook(bookname.value,bookdescription.value,username.value,bookimageurl.value)" type="button" class="btn btn-primary mt-2">Kaydet</button>
+  </form>
+
+
+</div>

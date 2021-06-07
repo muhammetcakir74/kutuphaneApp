@@ -1,0 +1,38 @@
+<div class="container">
+
+  <div class="row p-4">
+    <div >
+      <p style="float: left;width: 100%;">Sayın <b>{{ user.name }}</b> kütüphanemize hoşgeldiniz. <span class="badge bg-danger" style="float: right;">uygun olmayan kitap sayısı {{ fillBooks }}</span><span class="badge bg-success mx-3" style="float: right;">Şuan kütüphanemizdeki uygun kitap sayısı {{ emptyBooks }} </span></p>
+    </div>
+    <span *ngIf="user.name=='Misafir'" class="mb-4">Kitap talebinde bulunmak için lütfen <b>giriş</b> yapınız</span>
+    <span *ngIf="user.name!='Misafir'">Kitap talebinde bulunmak için 'Kitaba Git'e basınız.</span>
+
+    <div class="col-md-9">
+      <div class="row">
+       <div class="col-md-4 mt-3" *ngFor="let book of books">
+        <div class="card" style="width: 15rem;">
+          <img class="card-img-top" src="assets/img/{{ book.imageUrl }}" alt="Card image cap" style="height: 15rem;">
+          <div class="card-body">
+            <h5 class="card-title" style="height: 5rem;">{{ book.name }}</h5>
+            <div *ngIf="book.userid!=null">
+              <a [routerLink]="['/booklist',book.id]" class="btn btn-primary">Kitaba Git</a><span style="margin-left: 0.5rem;color: red;"><i class="bi bi-circle-fill"></i></span>
+            </div>
+            <div *ngIf="book.userid==null">
+              <a [routerLink]="['/booklist',book.id]" class="btn btn-primary">Kitaba Git</a><span style="margin-left: 0.5rem;color: #7FFF00;"><i class="bi bi-circle-fill"></i></span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="col-md-3">
+      <div class="btn-group-vertical my-3">
+        <button (click)="getEmpty()" class="btn btn-outline-dark">Sadece Uygun Kitaplar</button><button (click)="getFill()" class="btn btn-outline-dark">Sadece Uygun Olmayan Kitaplar</button><button (click)="getAll()" class="btn btn-outline-dark">Bütün Kitaplar</button>
+      </div>
+    </div>
+
+
+
+  </div>
+</div>
